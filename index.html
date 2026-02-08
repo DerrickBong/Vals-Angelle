@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Angelle, Will You Be My Valentine? 💖</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ffe6f2, #ffb6c1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #ff69b4;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background-color: #ff4081;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #noBtn {
+      background-color: #ccc;
+      color: #333;
+      position: absolute;
+    }
+
+    #message {
+      display: none;
+      margin-top: 40px;
+      font-size: 1.8rem;
+      color: #d63384;
+      font-weight: bold;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      color: rgba(255, 105, 180, 0.7);
+      font-size: 20px;
+      animation: float 5s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateY(0) rotate(0deg); opacity: 1; }
+      to { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bg-music" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_bf6a0ad5f1.mp3?filename=romantic-piano-loop-110417.mp3" type="audio/mpeg">
+  </audio>
+
+  <h1>Hey Tanko Angelle ❤️</h1>
+  <h2>Will you be my Valentine? 💘</h2>
+
+  <div class="buttons">
+    <button id="yesBtn">Yes I will baby 💕</button>
+    <button id="noBtn">No 😅</button>
+  </div>
+
+  <div id="message">Yehhh!! Thank You Mama ❤️<br>I love you sooo much baby 😘🎉</div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
+
+    // Move the No button when hovered
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    // When Yes is clicked
+    yesBtn.addEventListener('click', () => {
+      message.style.display = 'block';
+      yesBtn.style.display = 'none';
+      noBtn.style.display = 'none';
+      confetti();
+    });
+
+    // Confetti effect
+    function confetti() {
+      for (let i = 0; i < 150; i++) {
+        const confetto = document.createElement('div');
+        confetto.style.position = 'fixed';
+        confetto.style.left = Math.random() * 100 + 'vw';
+        confetto.style.top = '-10px';
+        confetto.style.width = '10px';
+        confetto.style.height = '10px';
+        confetto.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+        confetto.style.borderRadius = '50%';
+        confetto.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+        document.body.appendChild(confetto);
+        setTimeout(() => confetto.remove(), 5000);
+      }
+    }
+
+    // Heart animation
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.innerHTML = '💖';
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.top = '100vh';
+      heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+      heart.style.animationDuration = Math.random() * 5 + 3 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }, 500);
+
+    // Falling confetti animation
+    const style = document.createElement('style');
+    style.innerHTML = `
+      @keyframes fall {
+        to {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
